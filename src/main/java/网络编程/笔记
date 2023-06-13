@@ -1,0 +1,30 @@
+B/S:公共协议      C/S:可自定义协议，格式
+
+网络分层：
+OSI：	      |TCP/IP协议：
+应用层,表示层,会话层 |应用层  Telnet FTP SMTP DNS HTTP
+传输层                                  |传输层  TCP UDP	                      Segment段
+网络层			  |网络层 IP ARP RARP ICMP               Packet包
+数据链路层,物理层         |网络接口 各类通信网络接口 (以太网等) (物理网络)    Frame帧 >> 比特流
+
+端口：
+80：http
+8080：tomcat
+1521：Oracle
+3306：mysql
+
+netstat -ano|findstr 8080(端口)  根据端口找进程
+tasklist|findstr 3780(进程号) 根据进程号 找服务程序
+ipconfig 查询ip地址
+
+seo : search engine optimization
+sem : search engine marcketing
+
+TCP:transfer control protocol
+应用层:http,ftp,smtp(发邮件)
+UDP:User Datagram Protocol
+应用层:DNS域名解析,SNMP简单网络协议(监控系统)
+
+UDP和TCP的区别:
+udp:单向传输，不需要建立连接（可以通过同时建立发送，接收线程互相通讯），发送内容为字节数组的package
+tcp:双向连接，发送内容为IO流 client.getOutputStream,client.getInputStream

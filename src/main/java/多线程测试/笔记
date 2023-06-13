@@ -1,0 +1,42 @@
+线程状态：
+新生: new出一个thread对象
+-就绪:(cpu一空出来就调): start(),yield(),阻塞状态解除,时间片用完回到就绪状态等待cpu资源
+-阻塞 :(cpu空闲也不调):
+(旧分类：--等待阻塞:wait(Thread方法,释放对象锁)
+--同步阻塞:运行中的线程，在试图获取对象的同步锁时，如果该锁被其他线程占用，进入阻塞状态
+--其他阻塞:sleep(Object方法,不释放对象锁),join(插队，暂停所在线程，直到当前线程完成 ),IO操作（实际上在vm里是runnable状态，更准确说是就绪状态，在等cup）)
+--Blocked: 等待一个观察锁来进入同步块或方法
+--Waiting: 等待另一个程序的具体动作。比如说调用了wait()需要等待notify或者notifyAll.A程序里写B.join,A进入Waiting状态,直到B程序结束。  LockSupport。park
+--TimedWaiting: 限时等待,wait,join加上时间。sleep方法。LockSupport.parkUntil,LockSupport.parkNanos
+-终止: stop(弃用),destroy(弃用)，用flag标识让线程跳出循环，执行结束
+
+常用方法:
+Thread.activeCount()
+t.setPriority()
+t.setDaemon()
+t.isAlive()
+t.setName()
+t.getName()
+Thread.currentThread().getName()
+Timer.schedule(new TimerTask(),time);
+quartz框架：scheduler,trigger(dsl领域特定语言处理),JobDetail()，Job
+
+死锁解决方案
+1.规定获得锁的顺序相同
+2.一次性获得多个锁
+3.利用表级索????????
+4.分布式锁???????????
+
+先写后读，先读后写，先写后写都有依赖，不会发生指令重排
+volatile作用：
+1.保证数据的同步性，数据操作完后立即写到主存里
+2.防止指令重排(对象创建步骤：分配空间，初始化，返回地址。线程1初始化对象时可能指令重排，先返回地址后初始化，线程2立即获取对象，得到一个空对象的地址)
+
+dcl单例模式：懒汉式和饿汉式
+
+ThreadLocal 构造方法中的threadLocal属于调用者，run方法中的threadLocal属于线程本身
+Inheritable
+
+CAS compare and swap：乐观锁的一种实现：假设没有冲突区实现操作，失败则重新尝试。
+ V内存值  A旧值 B预期值, 当V等于A，则修改A为B，并返回true,否则返回false
+ 属于原子操作，硬件操作，不会被打断。利用cas，借助jni完成的非阻塞算法，效率比加锁高。

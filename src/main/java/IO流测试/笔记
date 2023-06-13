@@ -1,0 +1,29 @@
+java.io最重要的是5个类和3个接口 File InputStream OutputStream Reader Writer, Closable Flushable Serializable
+
+流分类：
+按方向：输入流，输出流
+按功能：节点流（直接从数据源读取数据） ，处理流（也叫包装流，间接从目的地读取数据，是其他流的封装，简化操作，提高性能）
+按数据：字节流，字符流
+
+
+文件输入输出流：jvm >> os(operation system) >> 文件. 需要手动关闭流
+ByteArray字节数组流： jvm >> 直接访问内存字节数组   gc自动关闭
+
+流关闭方法：
+Closeable... ios 可变参数，循环关闭流
+try with resource关闭流 try(inputStream,outputStream){}
+
+节点流：
+FileInputStream
+FileReader
+ByteArrayInputputStream包含了一个内部的缓冲区，可以从流中读取数据，ByteArrayOutputStream将字节数组写入内存缓冲区，.toByteArray()，toString()获取数据
+
+装饰流：//装饰节点流
+--缓冲流：
+BufferedInputStream(new FileInputStream(src)) //buffed默认8k内存空间 
+BufferedReader(new FileWriter(src))
+--（转换流）字符流处理字节流
+InputStreamReader(new InputStream() )字符流处理字节流 
+--数据流
+-DataInputStream(节点流)--->fileInputStream,byteArrayInputStream
+
